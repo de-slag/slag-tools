@@ -6,7 +6,7 @@ readonly DAY=$DAY_IN_SECONDS
 readonly HALF_DAY=$(echo "$DAY_IN_SECONDS/2"|bc)
 
 function print_file_timestamp {
-  file_ts=$(date -r $1 "+%s")
+  local file_ts=$(date -r $1 "+%s")
   echo "timestamp of file '$1' is '$file_ts'"
 }
 
