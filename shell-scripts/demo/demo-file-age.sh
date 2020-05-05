@@ -1,4 +1,13 @@
 #!/bin/bash
+FILE=
+if [ ! -z $1 ] ; then
+  FILE=$1
+else
+  echo "first parameter empty, use 'test.dat' instead"
+  FILE=test.dat
+fi
+
+
 readonly DAY_IN_SECONDS=86400
 
 readonly DAYS_14=$(echo "$DAY_IN_SECONDS*14" |bc)
@@ -28,6 +37,6 @@ function is_outdated {
 
 }
 
-print_file_timestamp test.dat
-is_outdated test.dat
+print_file_timestamp $FILE
+is_outdated $FILE
 
