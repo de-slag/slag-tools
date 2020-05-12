@@ -14,6 +14,8 @@ fi
 cd logic
 
 
+echo "FIXME: dont echo DOLLAR0 here"
+exit 1
 
 if [ -e minutely.sh ] ; then
   mv minutely.sh minutely.sh-BAK_$CURRENT_TS
