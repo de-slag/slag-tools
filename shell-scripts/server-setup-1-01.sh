@@ -2,7 +2,7 @@
 
 CURRENT_TS=$(date +'%s')
 
-cd root
+cd /root
 mkdir logic
 mkdir data/logs
 cd logic
