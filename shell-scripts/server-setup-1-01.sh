@@ -3,8 +3,14 @@
 CURRENT_TS=$(date +'%s')
 
 cd /root
-mkdir logic
-mkdir data/logs
+if [ ! -e logic ] ; then
+  mkdir logic
+fi
+
+if [ ! -e data/logs ] ; then
+  mkdir data/logs
+fi
+
 cd logic
 
 
