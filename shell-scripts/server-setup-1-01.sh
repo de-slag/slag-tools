@@ -2,9 +2,14 @@
 
 CURRENT_TS=$(date +'%s')
 
+echo "current TS is $CURRENT_TS"
+
 cd /root
 if [ ! -e logic ] ; then
+  echo "create '/root/logic'"
   mkdir logic
+else
+  echo "'/root/logic' already exisis"
 fi
 
 if [ ! -e data/logs ] ; then
