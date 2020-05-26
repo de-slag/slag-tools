@@ -1,9 +1,7 @@
 #!/bin/bash
-readonly TRIGGER_FILE=/tmp/upgrade-system.trigger
 
-if [ -e $TRIGGER_FILE ] ; then
-  exit 0
-fi
-rm $TRIGGER_FILE
+function run_upgrade {
+  apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y && apt-get clean
+}
 
-
+run_upgrade
