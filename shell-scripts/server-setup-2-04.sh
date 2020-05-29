@@ -1,6 +1,14 @@
-
 #!/bin/bash
+
 clear
+
+echo "This scipt is supposed to set up a linux server. It should can be executed mutiple times, also future versions. It only create things, it does not cleans up things from further versions."
+echo
+echo "hit ENTER to continue"
+read
+
+
+
 
 function assert_dir {
   if [ -z $1 ] ; then
@@ -22,6 +30,13 @@ function create_00_script {
   echo "create 00_$1.sh in '/root/logic/$1' on your own"
 }
 
+function print_crontab_entry {
+  local dir=$1
+  local start_at=$2
+
+  echo "$start_at  cd /root/logic/$dir  && for f in *.sh; do bash \"\$f\" -H ;done >> /root/data/logs/$dir.log 2>&1"
+}
+
 echo "#### assert some directories..."
 echo
 
@@ -34,10 +49,11 @@ assert_dir /root/data/logs
 echo
 echo "#### now add the following lines to root's crontab"
 echo
-echo "@reboot    cd /root/logic/at-reboot && for f in *.sh; do bash "$f" -H ;done >> /root/data/logs/at-reboot.log 2>&1"
-echo "* * * * *  cd /root/logic/minutely  && for f in *.sh; do bash "$f" -H ;done >> /root/data/logs/minutely.log 2>&1"
-echo "0 5 * * *  cd /root/logic/daily     && for f in *.sh; do bash "$f" -H ;done >> /root/data/logs/daily.log 2>&1"
-echo "0 0 * * 1  cd /root/logic/weekly/   && for f in *.sh; do bash "$f" -H ;done >> /root/data/logs/weekly.log 2>&1"
+print_crontab_entry minutely "* * * * *"
+print_crontab_entry daily  "0 5 * * *"
+print_crontab_entry weekly "0 0 * * 1"
+print_crontab_entry at-reboot "@reboot"
+
 echo
 echo "#### when done, hit ENTER to continue."
 read

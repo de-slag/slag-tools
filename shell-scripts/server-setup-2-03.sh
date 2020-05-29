@@ -34,10 +34,10 @@ assert_dir /root/data/logs
 echo
 echo "#### now add the following lines to root's crontab"
 echo
-echo "@reboot    cd /root/logic/at-reboot && for f in *.sh; do bash "$f" -H ;done >> /root/data/logs/at-reboot.log 2>&1"
-echo "* * * * *  cd /root/logic/minutely  && for f in *.sh; do bash "$f" -H ;done >> /root/data/logs/minutely.log 2>&1"
-echo "0 5 * * *  cd /root/logic/daily     && for f in *.sh; do bash "$f" -H ;done >> /root/data/logs/daily.log 2>&1"
-echo "0 0 * * 1  cd /root/logic/weekly/   && for f in *.sh; do bash "$f" -H ;done >> /root/data/logs/weekly.log 2>&1"
+echo "@reboot    for f in /root/logic/at-reboot/*.sh; do bash "$f" -H ;done >> /root/data/logs/at-reboot.log 2>&1"
+echo "* * * * *  for f in /root/logic/minutely/*.sh; do bash "$f" -H ;done >> /root/data/logs/minutely.log 2>&1"
+echo "0 5 * * *  for f in /root/logic/daily/*.sh; do bash "$f" -H ;done >> /root/data/logs/daily.log 2>&1"
+echo "0 0 * * 1  for f in /root/logic/weekly/*.sh; do bash "$f" -H ;done >> /root/data/logs/weekly.log 2>&1"
 echo
 echo "#### when done, hit ENTER to continue."
 read
