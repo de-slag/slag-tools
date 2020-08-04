@@ -1,5 +1,50 @@
-y#!/bin/bash
-readonly tomcat_basedir=/opt/tomcat
+
+#!/bin/bash
+function log {
+  printf "$1\n"
+}
+
+
+log "redeploy tomcat"
+log "###"
+
+if [ ! -d bin ] || [ ! -d webapps ]; then
+  echo "ERROR: this script must be started from tomcat base dir"
+  exit 1
+fi
+
+
+$WEBBAPPS
+function determine_webapps {
+  cd webapps
+  WEBAPPS="$(ls *.war)"
+}
+
+determine_webapps
+echo $WEBAPPS
+
+log "UNFINISHED SCRIPT"
+
+# first of all stop tomcat
+
+# remove all directories and files that list in the $WEBAPPS array
+
+# implement a mandatory cli parameter: -d which points to the directory with webapps to deploy (deploy-directory)
+
+# copy all webapps in deploy-directory to webapps
+
+# clear logs and temp dir
+
+# restart tomcat
+
+
+
+
+
+log "INFO: all done"
+
+
+exit 0
 
 function cleanup_app {
 
