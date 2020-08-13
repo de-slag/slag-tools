@@ -40,11 +40,11 @@ function print_crontab_entry {
 echo "#### assert some directories..."
 echo
 
-assert_dir /root/logic/minutely
-assert_dir /root/logic/at-reboot
-assert_dir /root/logic/daily
-assert_dir /root/logic/weekly
-assert_dir /root/data/logs
+assert_dir /root/logic/minutely/
+assert_dir /root/logic/at-reboot/
+assert_dir /root/logic/daily/
+assert_dir /root/logic/weekly/
+assert_dir /root/data/logs/
 
 echo
 echo "#### now add the following lines to root's crontab"
