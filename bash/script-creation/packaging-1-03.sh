@@ -77,12 +77,12 @@ function read_config_file_line {
 
   if [[ "$line" = \#* ]] ; then
     log_debug "$line starts with #, skipping"
-    continue
+    return
   fi
 
   if [ -z $line ] ; then
     log_debug "line is empty, skipping"
-    continue
+    return
   fi
 
   log_debug "separate key value pair..."
