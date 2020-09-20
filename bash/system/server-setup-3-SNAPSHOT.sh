@@ -9,7 +9,6 @@ echo
 echo "hit ENTER to continue"
 read read_in
 
-
 case "$read_in" in
   w)
     echo "weekly";;
@@ -20,6 +19,9 @@ esac
 exit 0
 
 
+if [ -e ] ; then
+  
+fi
 
 
 function assert_dir {
