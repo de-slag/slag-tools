@@ -2,7 +2,7 @@
 #set -x
 
 ## target duration in seconds
-duration=2
+duration=5
 
 start=$(date +%s)
 target_end=$[$start+$duration]
