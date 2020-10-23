@@ -68,11 +68,13 @@ read_cli_args "$@"
 function run_backup {
   local source_dir=$1
   local target_dir=$2
-  local name=$3
 
-  log_error "'run_backup', not implemented yet"
+  # FIXME
+  log_error "the following command deletes also the .lock file"
+  exit 1
 
-  ## TODO: do a hard 1:1 snapshot using rsync
+  rsync -av $source_dir/ $target_dir --delete
+
 }
 
 function clear_dirs_no_backup {
@@ -87,17 +89,39 @@ log_debug "source dir: '$SOURCE_DIR'"
 log_debug "target dir: '$TARGET_DIR'"
 log_debug "name: '$NAME'"
 
-## TODO: assert no backup.lock file in target dir, otherwise error and EXIT 1
-## TODO: echo "snapshot" to target-dir .lock
+readonly LOCK_FILE="$TARGET_DIR/.lock"
+readonly DONE_FILE="$TARGET_DIR/snapshot.done"
+
+# assert target dir exists
+if [ ! -d $TARGET_DIR ] ; then
+  log_error "target dir does not exist '$TARGET_DIR'"
+  exit 1
+fi
+
+# assert lock file does not exist
+if [ -f $LOCK_FILE ] ; then
+  log_error "lock file exists: '$LOCK_FILE'"
+  exit 1
+fi
+
+# remove done file if any
+if [ -f $DONE_FILE ] ; then
+  rm $DONE_FILE
+  log_info "done-file removed"
+fi
+
+# create lock file
+echo "snapshot" > $LOCK_FILE
 
 run_backup $SOURCE_DIR $TARGET_DIR $NAME
 
+# start clear dirs if any
 if [[ "$NO_BACKUP" == true ]] ; then
   clear_dirs_no_backup $TARGET_DIR
 fi
 
-## TODO: touch a file: snapshot.done
-## TODO: remove .lock
+touch $DONE_FILE
+rm $LOCK_FILE
 
 log_info "all done!"
 
