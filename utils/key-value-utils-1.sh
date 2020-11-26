@@ -2,12 +2,26 @@
 
 source base-utils-1.sh
 
-KEY=""
-VALUE=""
+KEY=
+VALUE=
 function split_key_value {
-  local key_value=$1
+  local string=$1
+  local splitterator=$2
 
-  assert_not_null "key_value" $key_value
+  KEY=""
+  VALUE=""
 
-  
+  OIFS=$IFS
+  IFS='='
+
+  for token in $line
+  do
+    if [ -z $KEY ] ; then
+      KEY=$token
+      continue
+    fi
+    VALUE=$token
+  done
+  IFS=$OIFS
+
 }
