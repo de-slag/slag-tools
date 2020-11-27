@@ -35,7 +35,7 @@ function pull_git_repos {
 
 }
 
-sudo apt-get install git
+sudo apt-get -y install git
 
 pull_git_repos $1
 log_info "all done!"
