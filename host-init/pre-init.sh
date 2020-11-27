@@ -19,19 +19,19 @@ function pull_git_repos {
     exit 1
   fi
   
-  log_info "pullig git repos: $git_repos..."
+  log_info "clone git repos: $git_repos..."
 
   OIFS=$IFS
-  IFS=';'
+  IFS=','
 
   for git_repo in $git_repos
   do
-    log_info "pull git repo: $git_repo.."
-    # git pull $git_repo
-    log_info "pull git repo: $git_repo. done."
+    log_info "clone git repo: $git_repo.."
+    git clone $git_repo
+    log_info "clone git repo: $git_repo. done."
   done
   IFS=$OIFS
-  log_info "pullig git repos: $git_repos. done."
+  log_info "clone git repos: $git_repos. done."
 
 }
 
