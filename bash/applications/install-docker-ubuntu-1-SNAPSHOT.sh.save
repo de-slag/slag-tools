@@ -1,0 +1,37 @@
+#!/bin/bash
+
+ion user_request {
+  echo
+  echo "$1"
+  echo "hit ENTER to continue"
+  read
+}
+
+echo "this script installs docker on a ubuntu machine"
+echo "tested on ubuntu:"
+echo "  20.04"
+
+echo "I. make sure you meet the prerequisites"
+
+user_request "Uninstall old versions, if any"
+sudo apt-get remove docker docker-engine docker.io containerd runc
+
+user_request "II. Install using the repository"
+
+user_request "II a. Set up the repository"
+
+user_request "1. Update the apt package index and install packages to allow apt to use a repository over HTTPS"
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+
+user_request "2. Add Docker’s official GPG key"
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo apt-key fingerprint 0EBFCD88
+user_request "Verify that you now have the key with the fingerprint '9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88'"
+
