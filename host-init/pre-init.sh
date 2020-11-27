@@ -1,5 +1,25 @@
 #!/bin/bash
 
+# not tested
+exit 1
+
+function log {
+  printf "$1\n"
+}
+
+function log_error {
+  log "ERROR: $1"
+}
+
+function install_git {
+  sudo apt-get install git
+}
+
+if [ -z $1 ] ; then
+  log_error "no argument"
+  exit 1
+fi
+
 KEY=""
 VALUE=""
 function split_into_key_value {
