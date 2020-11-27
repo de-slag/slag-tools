@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# not tested
-exit 1
-
 function log {
   printf "$1\n"
 }
@@ -11,35 +8,34 @@ function log_error {
   log "ERROR: $1"
 }
 
-function install_git {
-  sudo apt-get install git
+function log_info {
+  log "INFO: $1"
 }
 
-if [ -z $1 ] ; then
-  log_error "no argument"
-  exit 1
-fi
-
-KEY=""
-VALUE=""
-function split_into_key_value {
-  local key_value=$1
-  if [ -z $key_value ] ; then
-    echo "key-value-string is empty"
+function pull_git_repos {
+  local git_repos=$1
+  if [ -z $git_repos ] ; then
+    log_error "git_repos is empty"
     exit 1
   fi
+  
+  log_info "pullig git repos: $git_repos..."
 
   OIFS=$IFS
-  IFS='='
+  IFS=';'
 
-  for token in $key_value
+  for git_repo in $git_repos
   do
-    if [ -z $KEY ] ; then
-      KEY=$token
-      continue
-    fi
-    VALUE=$token
+    log_info "pull git repo: $git_repo.."
+    # git pull $git_repo
+    log_info "pull git repo: $git_repo. done."
   done
   IFS=$OIFS
+  log_info "pullig git repos: $git_repos. done."
+
 }
 
+sudo apt-get install git
+
+pull_git_repos $1
+log_info "all done!"
