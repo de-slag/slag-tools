@@ -1,12 +1,12 @@
 #!/bin/bash
 # v2
 
+NAME=ubuntu-20.04-server
 VRT_DIR=/home/vrt-test
 VRT_ISO_DIR=$VRT_DIR/iso
 VRT_IMG_DIR=$VRT_DIR/img
-IMG=$VRT_IMG_DIR/ubuntu-20.04-server.img
+IMG=$VRT_IMG_DIR/$NAME.img
 ISO=$VRT_ISO_DIR/ubuntu-20.04.1-live-server-amd64.iso
-NAME=foo
 ISO_DL=https://ftp.halifax.rwth-aachen.de/ubuntu-releases/20.04/ubuntu-20.04.1-live-server-amd64.iso
 
 function log {
