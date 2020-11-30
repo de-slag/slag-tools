@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source ~/slag-tools/base-utils-stable.sh
-source ~/slag-tools/log-utils-stable.sh
+source ~/slag-tools/utils/base-utils-stable.sh
+source ~/slag-tools/utils/log-utils-stable.sh
 
 TARGET_HOSTNAME=$1
 
