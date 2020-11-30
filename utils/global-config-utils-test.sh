@@ -26,3 +26,6 @@ assert_equals "no key" "" $CONFIG_VALUE
 read_config_value test.lorem.ipsum
 assert_equals "lorem ipsum" "Lorem ipsum dolor sit amet." "$CONFIG_VALUE"
 
+read_config_value test.one
+assert_equals "one" "One" "$CONFIG_VALUE"
+
