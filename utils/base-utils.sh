@@ -1,7 +1,6 @@
 #!/bin/bash
 
-readonly UTILS_DIR=~/slag-tools/utils
-source $UTILS_DIR/logging-utils-stable.sh
+source ~/slag-tools/utils/logging-utils-stable.sh
 
 function assert_not_null {
   if [ -z $1 ] ; then
