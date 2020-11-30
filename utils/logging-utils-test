@@ -1,5 +1,5 @@
 #!/bin/bash
-source logging-utis-stable.sh
+source logging-utils-stable.sh
 
 log "redirect 'log' to log_info"
 log0 "this is a severity" "this is a message"
