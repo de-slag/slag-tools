@@ -74,7 +74,7 @@ function read_config_value {
     CONFIG_VALUE=VALUE
     log_debug "config value found: $CONFIG_VALUE"
     break
-  done < $properties_file 
+  done < $PROPERTIES_FILE 
 }
 
 if [ ! -f $PROPERTIES_FILE ] ; then
