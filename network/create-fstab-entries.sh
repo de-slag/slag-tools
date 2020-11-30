@@ -33,7 +33,7 @@ function generate_entry {
 # MAIN
 ## validation
 if [ -z $DOMAIN ] ; then
-  log_error "domain (1st parameter) not setted"
+  log_error "domain not setted"
   exit 1
 fi
 
