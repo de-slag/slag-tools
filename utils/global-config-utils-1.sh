@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ~/slag-tools/utils/base-utils-stable.sh
-source ~/slag-tools/logging-utils-stable.sh
+source ~/slag-tools/utils/logging-utils-stable.sh
 
 PROPERTIES_FILE=~/slag-configurations/global.properties
 
