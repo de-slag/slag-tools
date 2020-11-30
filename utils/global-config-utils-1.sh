@@ -67,7 +67,7 @@ function read_config_value {
   
   log_debug "read properties file..."
   while read line; do
-    read_config_value_from_line0 $line
+    read_config_value_from_line0 "$line"
     if [ "$KEY" != "$config_key" ] ; then
       continue
     fi
