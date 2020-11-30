@@ -9,7 +9,7 @@ fi
 # PARAMETERS
 DOMAIN=$1
 
-# base functions
+# BASE FUNCTIONS
 function log {
   echo $1
 }
@@ -18,11 +18,7 @@ function log_error {
   log "ERROR: $1"
 }
 
-if [ -z $DOMAIN ] ; then
-  log_error "domain (1st parameter) not setted"
-  exit 1
-fi
-
+# SPECIAL FUNCTIONS
 function generate_entry {
   local host=$1
   local host_domain="$host.$DOMAIN"
@@ -33,7 +29,18 @@ function generate_entry {
   echo "$ip_adress $host"
 }
 
+
+# MAIN
+## validation
+if [ -z $DOMAIN ] ; then
+  log_error "domain (1st parameter) not setted"
+  exit 1
+fi
+
+## run
 while [ ! -z $2 ] ; do
   generate_entry $2
   shift
 done
+
+log "all done!"
