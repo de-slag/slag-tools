@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "DEBUG" == $1 ] ; then
+if [ "DEBUG" = $1 ] ; then
   set -x
   shift
 fi
