@@ -16,11 +16,11 @@ function create_backups {
 }
 
 function sed_hostname {
-  sed '$SED_STRING /etc/hostname
+  sed $SED_STRING /etc/hostname
 }
 
-function sed_hosts {
-  sed '$SED_STRING /etc/hosts
+function sedxhosts {
+  sed $SED_STRING /etc/hosts
 }
 
 log_info "set hostname from '$CURRENT_HOSTNAME' to '$TARGET_HOSTNAME'"
