@@ -12,8 +12,9 @@ function assert_equals {
   local message=$1
   local expected=$2
   local current=$3
+  log_debug "compare '$expected' with '$current'"
   if [ "$expected" != "$current" ] ; then
-    echo "not equal. expected $expected, current $current"  
+    echo "not equal. expected '$expected', current '$current'"  
     return
   fi
   echo "ok: $message"
