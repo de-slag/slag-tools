@@ -42,5 +42,3 @@ while [ ! -z $2 ] ; do
   generate_entry $2
   shift
 done
-
-log "all done!"
