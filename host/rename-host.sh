@@ -23,7 +23,7 @@ function sed_hosts {
   sed '$SED_STRING /etc/hosts
 }
 
-log_info "set hostname from '$CURRENT_HOSTNAME' to '$TARGET_HOSTNAME'
+log_info "set hostname from '$CURRENT_HOSTNAME' to '$TARGET_HOSTNAME'"
 
 exit 0
 
