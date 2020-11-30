@@ -39,7 +39,7 @@ function read_config_value_from_line0 {
   log_debug "processing line '$line'..."
 
   if [[ "$line" = \#* ]] ; then
-    log_debug "$line starts with #, skipping"
+    log_debug "the string '$line' starts with #, skipping"
     return
   fi
 
