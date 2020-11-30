@@ -5,7 +5,23 @@ if [ "DEBUG" = "$1" ] ; then
   shift
 fi
 
+
+# PARAMETERS
 DOMAIN=$1
+
+# base functions
+function log {
+  echo $1
+}
+
+function log_error {
+  log "ERROR: $1"
+}
+
+if [ -z $DOMAIN ] ; then
+  log_error "domain (1st parameter) not setted"
+  exit 1
+fi
 
 function generate_entry {
   local host=$1
