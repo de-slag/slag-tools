@@ -43,7 +43,7 @@ function read_config_value_from_line0 {
     return
   fi
 
-  if [ -z $line ] ; then
+  if [ -z "$line" ] ; then
     log_debug "line is empty, skipping"
     return
   fi
