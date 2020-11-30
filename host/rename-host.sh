@@ -3,8 +3,8 @@
 source ~/slag-tools/utils/base-utils-stable.sh
 source ~/slag-tools/utils/logging-utils-stable.sh
 
-CURRENT_HOSTNAME=$1
-TARGET_HOSTNAME=$2
+CURRENT_HOSTNAME=$(cat /etc/hostname)
+TARGET_HOSTNAME=$1
 TIMESTAMP=$(date +%s)
 
 SED_STRING='s/$CURRENT_HOSTNAME/$TARGET_HOSTNAME/'
@@ -22,6 +22,10 @@ function sed_hostname {
 function sed_hosts {
   sed '$SED_STRING /etc/hosts
 }
+
+log_info "set hostname from '$CURRENT_HOSTNAME' to '$TARGET_HOSTNAME'
+
+exit 0
 
 create_backups
 sed_hosts
