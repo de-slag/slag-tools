@@ -12,7 +12,7 @@ CONFIG_VALUE=
 
 KEY=
 VALUE=
-function split_key_value {
+function split_key_value0 {
   local string=$1
   local splitterator=$2
 
@@ -50,7 +50,7 @@ function read_config_value_from_line0 {
 
   log_debug "separate key value pair..."
 
-  split_key_value $line
+  split_key_value0 $line
 
   log_debug "separate key value pair...done"
   log_debug "key: '$KEY', value: '$VALUE'"
@@ -69,8 +69,7 @@ function read_config_value {
     CONFIG_VALUE=VALUE
     log_debug "config value found: $CONFIG_VALUE"
     break
-  done < $properties_file
-  
+  done < $properties_file 
 }
 
 if [ ! -f $PROPERTIES_FILE ] ; then
