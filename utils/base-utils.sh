@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source logging-utils-1.sh
+source ~/slag-tools/utils/logging-utils-stable.sh
 
 function assert_not_null {
   if [ -z $1 ] ; then
