@@ -71,7 +71,7 @@ function read_config_value {
     if [ "$KEY" != "$config_key" ] ; then
       continue
     fi
-    CONFIG_VALUE=VALUE
+    CONFIG_VALUE=$VALUE
     log_debug "config value found: $CONFIG_VALUE"
     break
   done < $PROPERTIES_FILE 
