@@ -1,10 +1,7 @@
 #!/bin/bash
 
-readonly UTILS_DIR=~/slag-tools/utils
-readonly CONFIG_DIR=~/slag-configurations
-
-source $UTILS_DIR/base-utils-stable.sh
-source $UTILS_DIR/logging-utils-stable.sh
+source ~/slag-tools/utils/base-utils-stable.sh
+source ~/slag-configurations/logging-utils-stable.sh
 
 PROPERTIES_FILE=$CONFIG_DIR/global.properties
 
