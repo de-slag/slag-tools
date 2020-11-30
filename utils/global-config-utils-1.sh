@@ -60,6 +60,11 @@ function read_config_value {
   local config_key=$1
   CONFIG_VALUE=
   
+  if [ -z $config_key ] ; then
+    log_debug "no config key setted, return"
+    return
+  fi
+  
   log_debug "read properties file..."
   while read line; do
     read_config_value_from_line0 $line
