@@ -25,8 +25,6 @@ function sed_hosts {
 
 log_info "set hostname from '$CURRENT_HOSTNAME' to '$TARGET_HOSTNAME'"
 
-exit 0
-
 create_backups
 sed_hosts
 sed_hostname
