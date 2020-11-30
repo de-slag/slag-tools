@@ -1,9 +1,9 @@
 #!/bin/bash
 
 source ~/slag-tools/utils/base-utils-stable.sh
-source ~/slag-configurations/logging-utils-stable.sh
+source ~/slag-tools/logging-utils-stable.sh
 
-PROPERTIES_FILE=$CONFIG_DIR/global.properties
+PROPERTIES_FILE=~/slag-configurations/global.properties
 
 CONFIG_VALUE=
 
