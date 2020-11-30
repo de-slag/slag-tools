@@ -28,7 +28,7 @@ function split_key_value0 {
       KEY=$token
       continue
     fi
-    VALUE=$token
+    VALUE="$token"
   done
   IFS=$OIFS
 }
