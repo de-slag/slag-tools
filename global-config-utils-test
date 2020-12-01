@@ -1,0 +1,33 @@
+#!/bin/bash
+
+VERSION=
+if [ -z $1 ] ; then
+  VERSION=stable
+else
+  VERSION=$1
+fi
+
+source logging-utils-stable.sh
+source global-config-utils-$VERSION.sh
+
+function assert_equals {
+  local message=$1
+  local expected=$2
+  local current=$3
+  log_debug "compare '$expected' with '$current'"
+  if [ "$expected" != "$current" ] ; then
+    echo "not equal. expected '$expected', current '$current'"  
+    return
+  fi
+  echo "ok: $message"
+}
+
+read_config_value
+assert_equals "no key" "" $CONFIG_VALUE
+
+read_config_value test.lorem.ipsum
+assert_equals "lorem ipsum" "Lorem ipsum dolor sit amet." "$CONFIG_VALUE"
+
+read_config_value test.one
+assert_equals "one" "One" "$CONFIG_VALUE"
+

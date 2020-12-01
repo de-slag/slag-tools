@@ -1,10 +1,10 @@
 #!/bin/bash
 
-DIR=/tmp/sed-test
-FILE=$DIR/test.dat
+TS=$(date +%s)
+
+FILE=/tmp/test-$TS.dat
 
 # prepare
-mkdir /tmp/sed-test
 echo "abc" > $FILE
 echo "def" >> $FILE
 echo "ghi" >> $FILE
