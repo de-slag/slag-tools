@@ -5,11 +5,6 @@ if [ "DEBUG" = "$1" ] ; then
   shift
 fi
 
-if [ -z $1 ] ; then
-  $0 speedport.ip merkur venus mars jupiter saturn uranus neptun ceres pluto eris makemake haumea
-fi
-
-
 # PARAMETERS
 DOMAIN=$1
 
