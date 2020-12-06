@@ -1,14 +1,28 @@
 # slag-tools
 
-## Pattern Language
+## program files
 
-### function_*
-i.e. function_foo-bar.sh
+*purpose:*
+* primary logic elements
+* elementary executable logic
 
-contains one or more functions
+*naming-pattern:*
+* noun-verb-version.sh
+* noun-verb-[adverb]-version.sh
 
-### *_test
-i.e. function_foo-bar_test.sh
+## util files
+*purpose:*
+* sub logic elements
+* not elementary executalbe logic
+* tools to be used in external logic
 
-contains a test for a script
+*naming:*
+*-utils*
 
+## public methods (sub logic elements)
+*naming:*
+* verb-[adverb]-noun
+
+## private methods (sub logic elements)
+*naming:*
+* verb-[adverb]-noun-0
