@@ -28,3 +28,11 @@ function log_error {
 function log_debug {
   log0 "DEBUG" "$1"
 }
+
+echo "logging-utils, methods"
+echo "  log (text)"
+echo "  log_info (text)"
+echo "  log_warn (text)"
+echo "  log_error (text)"
+echo "  log_debug (text)"
+
