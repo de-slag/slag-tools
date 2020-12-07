@@ -12,17 +12,17 @@
 
 ## util files
 *purpose:*
-* sub logic elements
-* not elementary executalbe logic
-* tools to be used in external logic
+* not elementary executalbe logic, no main program
+* tools to be used in external logic as **source**
+* elementary called prints public methods
 
 *naming:*
-*-utils*
+* -utils*
 
-## public methods (sub logic elements)
+## public methods
 *naming:*
 * verb-[adverb]-noun
 
 ## private methods (sub logic elements)
 *naming:*
-* verb-[adverb]-noun-0
+* verb-[adverb]-noun-[0,1,2,..]
