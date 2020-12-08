@@ -1,9 +1,0 @@
-#!/bin/bash
-source logging-utils-stable.sh
-
-log "redirect 'log' to log_info"
-log0 "this is a severity" "this is a message"
-log_info "log this an info"
-log_warn "log this a warn"
-log_error "log this an error"
-log_debug "log this a debug"

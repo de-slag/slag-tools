@@ -29,6 +29,10 @@ function log_debug {
   log0 "DEBUG" "$1"
 }
 
+function log_trace {
+  log0 "TRACE" "$1"
+}
+
 echo "logging-utils, methods:"
 echo "  log (text)"
 echo "  log_error (text)"

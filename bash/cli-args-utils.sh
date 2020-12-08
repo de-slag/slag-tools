@@ -8,8 +8,13 @@ CLI_ARGUMENT=
 #  echo $CLI_ARGUMENT"
 function read_cli_argument {
   argument=$1
-  all_arguments=$2
+  all_arguments="$2"
   CLI_ARGUMENT=
+
+  if [ -z $all_arguments ] ; then
+    log_info "no arguments given, return"
+    return
+  fi
 
   log_debug "argument looking for: '$argument', from all arguments: '$all_arguments'"
 
@@ -17,9 +22,10 @@ function read_cli_argument {
     do
     case $i in
       $argument=*)
-        log_debug "found: $i"
+        log_debug "found: '$i'"
         CLI_ARGUMENT="${i#*=}"
-        shift
+        log_debug "found value: '$CLI_ARGUMENT'"
+        return
         ;;
 
       *)
@@ -29,6 +35,7 @@ function read_cli_argument {
 
     esac
     done
+  log_info "'$argument' not found in '$all_arguments'"
 }
 
 echo "cli-args-utils, methods"
