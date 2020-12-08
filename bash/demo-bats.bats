@@ -19,3 +19,10 @@
 @test "very simple test" {
   ls
 }
+
+# create a file 'demo.sh' and make it executable
+# #!/bin/bash
+# function a_test {
+#   echo "$1-ing"
+# }
+# echo "this is a test"
