@@ -24,6 +24,14 @@ function assert_user_root {
   fi
 }
 
+USER_INPUT=
+function user_input {
+  local text="$1"
+  USER_INPUT=
+  printf "$text "
+  read USER_INPUT
+}
+
 echo "base-utils, methods:"
 echo "  assert_not_null (value)"
 echo "  assert_user_root ()"
