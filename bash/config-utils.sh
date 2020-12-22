@@ -46,7 +46,7 @@ function read_config_value_from_line0 {
 
   log_debug "separate key value pair..."
 
-  split_key_value0 $line
+  split_key_value0 "$line"
 
   log_debug "separate key value pair...done"
   log_debug "key: '$GLOBAL_CONFIG_UTILS_KEY', value: '$GLOBAL_CONFIG_UTILS_VALUE'"
@@ -88,11 +88,11 @@ function read_config_value {
     log_debug "config value found: '$CONFIG_VALUE'"
     break
   done < $properties_file
-  if [ -z $CONFIG_VALUE ] ; then
+  if [ -z "$CONFIG_VALUE" ] ; then
     log_debug "config key '$config_key' not found in file '$properties_file'"
   fi
 }
 
 echo "config-utils, methods:"
-echo "  CONFIG_VALUE read_config_value (config_key)"
+echo "  CONFIG_VALUE read_config_value (config_key,properties_file)"
 
