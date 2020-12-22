@@ -12,6 +12,7 @@ function ui {
 
 function tomcat_application_server_wizard {
   log "tomcat application server"
+  cd ~/slag-tools/bash
 
   read_config_value "server.tomcat.installation.dir.parent" $CONFIG_FILE
   local tc_inst_dir_parent=$CONFIG_VALUE
@@ -38,6 +39,7 @@ function tomcat_application_server_wizard {
 
 function home_host_wizard {
   log_info "start: host setup local..."
+  cd ~/slag-tools/bash
   bash -euo pipefail ./host-setup-local.sh
   log_info "start: host setup local. done."
 }
