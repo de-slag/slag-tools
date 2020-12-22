@@ -34,6 +34,10 @@ function tomcat_application_server_wizard {
   log "unzip tomcat from '$target_file'..."
   tar -xf $target_file
   ln -sf $tc_name apache-tomcat-current
+
+  cd $tc_inst_dir_parent/apache-tomcat-current/bin
+  bash -euo pipefail ./startup.sh
+
   
 }
 
@@ -42,6 +46,12 @@ function home_host_wizard {
   cd ~/slag-tools/bash
   bash -euo pipefail ./host-setup-local.sh
   log_info "start: host setup local. done."
+}
+
+function install_package {
+  local package_name=$1
+  ui "install $package_name"
+  apt-get -y install $package_name
 }
 
 clear
@@ -56,11 +66,14 @@ do
    log "you choosed: $feature"
    case "$feature" in
    t)
-     apt-get install -y curl
+     install_package curl
+     install_package openjdk-11-jdk
+
      tomcat_application_server_wizard
      continue;;
    h)
-     apt-get install -y nfs-common
+    install_package nfs-common
+
      home_host_wizard
      continue;;
 esac
