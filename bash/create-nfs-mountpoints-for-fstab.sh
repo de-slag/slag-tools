@@ -97,12 +97,25 @@ function append_to_fstab {
   cat /etc/fstab.to-append >> /etc/fstab
 }
 
+PACKAGES="nfs-common"
+function install_packages {
+  log_debug "install packages: '$PACKAGES'"
+  apt-get -y install "$PACKAGES"
+}
+
+function mount_all {
+  log_debug "mount all"
+  mount -a
+}
+
+install_packages
 create_mountpoints
 create_entries
 
 printf "$TARGET_FILE_CONTENT" > /etc/fstab.to-append
 
 append_to_fstab
+mount_all
 
 log_info "all done"
 
