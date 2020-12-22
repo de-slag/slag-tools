@@ -37,23 +37,12 @@ function tomcat_application_server_wizard {
 }
 
 function home_host_wizard {
-  log "home host wizard"
-  cd /etc
-  local ts=$(date '+%Y-%m-%dT%H:%M:%S')
-  local host_bak_filename="hosts-.bak-$ts"
-  log "backup 'hosts' file to '$host_bak_filename'"
-  
-  read_config_value "host.home.hosts" $CONFIG_FILE
-  local hosts_to_append=$CONFIG_VALUE
-  log "hosts to append from file '$hosts_to_append'"
-
-  cp hosts $host_bak_filename
-  cat $hosts_to_append >> hosts
-
-  
-
+  log_info "start: host setup local..."
+  bash -euo pipefail ./host-setup-local.sh
+  log_info "start: host setup local. done."
 }
 
+clear
 printf "\n\n # MAIN PROGRAM #\n"
 
 ui "(t)omcat application server\n(h)ome host\nenter some host features (blank separated):"
@@ -63,7 +52,7 @@ echo "you choosed: '$FEATURES'"
 for feature in $FEATURES
 do
    log "you choosed: $feature"
-  case "$feature" in
+   case "$feature" in
    t)
      tomcat_application_server_wizard
      continue;;

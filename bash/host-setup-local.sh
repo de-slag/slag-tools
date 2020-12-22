@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source logging_utils.sh
+source logging-utils.sh
 source config-utils.sh
 
 TARGET_FILE_CONTENT=
