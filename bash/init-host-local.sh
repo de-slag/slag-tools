@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "@deprecated"
+exit 0
+
 cd ~/slag-tools/utils
 source logging-utils-stable.sh
 source base-utils-latest.sh
