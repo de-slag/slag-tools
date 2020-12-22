@@ -54,9 +54,11 @@ do
    log "you choosed: $feature"
    case "$feature" in
    t)
+     apt-get install -y curl
      tomcat_application_server_wizard
      continue;;
    h)
+     apt-get install -y nfs-common
      home_host_wizard
      continue;;
 esac
