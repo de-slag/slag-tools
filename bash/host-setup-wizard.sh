@@ -45,6 +45,7 @@ function tomcat_application_server_wizard {
 
   echo "#!/bin/bash" > /etc/cron.rebootly/start_tomcat
   echo "$tc_inst_dir_parent/apache-tomcat-current/bin/startup.sh" >> /etc/cron.rebootly/start_tomcat
+  chmod +x /etc/cron.rebootly/start_tomcat
   
 }
 
@@ -55,6 +56,7 @@ function home_host_wizard {
   
   echo "#!/bin/bash" > /etc/cron.minutely/mount_all
   echo "mount -a" >> /etc/cron.minutely/mount_all
+  chmod +x /etc/cron.minutely/mount_all
 
   log_info "start: host setup local. done."
 }
