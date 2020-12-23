@@ -43,8 +43,8 @@ function tomcat_application_server_wizard {
   cd $tc_inst_dir_parent/apache-tomcat-current/bin
   bash -euo pipefail ./startup.sh
 
-  echo "#!/bin/bash" > etc/cron.rebootly/start_tomcat
-  echo "$tc_inst_dir_parent/apache-tomcat-current/bin/startup.sh" >> etc/cron.rebootly/start_tomcat
+  echo "#!/bin/bash" > /etc/cron.rebootly/start_tomcat
+  echo "$tc_inst_dir_parent/apache-tomcat-current/bin/startup.sh" >> /etc/cron.rebootly/start_tomcat
   
 }
 
