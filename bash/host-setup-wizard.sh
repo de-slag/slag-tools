@@ -4,14 +4,21 @@ set -euo pipefail
 
 source base-utils.sh
 source config-utils.sh
+
 readonly CONFIG_FILE=~/slag-configurations/global.properties
+
+PROTOCOL=
+
+function append_to_protocol {
+  PROTOCOL="$PROTOCOL$1\n"
+}
 
 function ui {
   user_input "$1"
 }
 
 function tomcat_application_server_wizard {
-  log "tomcat application server"
+  log "set up feature 'tomcat application server'..."
   cd ~/slag-tools/bash
 
   read_config_value "server.tomcat.installation.dir.parent" $CONFIG_FILE
@@ -43,14 +50,17 @@ function tomcat_application_server_wizard {
   cd $tc_inst_dir_parent/apache-tomcat-current/bin
   bash -euo pipefail ./startup.sh
 
+  log "add entry in cron.rebootly..."
   echo "#!/bin/bash" > /etc/cron.rebootly/start_tomcat
   echo "$tc_inst_dir_parent/apache-tomcat-current/bin/startup.sh" >> /etc/cron.rebootly/start_tomcat
   chmod +x /etc/cron.rebootly/start_tomcat
-  
+
+  append_to_protocol "set up 'tomcat application server' feature: OK"
+  log "set up feature 'tomcat application server'. done." 
 }
 
 function home_host_wizard {
-  log_info "start: host setup local..."
+  log_info "set up feature 'home host'..."
   cd ~/slag-tools/bash
   bash -euo pipefail ./host-setup-local.sh
   
@@ -58,26 +68,36 @@ function home_host_wizard {
   echo "mount -a" >> /etc/cron.minutely/mount_all
   chmod +x /etc/cron.minutely/mount_all
 
-  log_info "start: host setup local. done."
+  append_to_protocol "set up 'home host' feature: OK"
+  log_info "set up feature 'home host'. done."
 }
 
 function install_package {
   local package_name=$1
-  ui "install $package_name"
+  ui "install '$package_name'"
   apt-get -y install $package_name
+  append_to_protocol "installed: '$package_name'"
 }
 
 function extend_crontab {
+  log_info "set up feature 'extend crontab'..."
   local ts=$(date '+%Y-%m-%d_%H-%M-%S')
   local crontab_backup_name="/etc/crontab.bak-$ts"
   log_info "backup '/etc/crontab' to '$crontab_backup_name'"
+
+  log_debug "backup '/etc/crontab'..."
   cp /etc/crontab $crontab_backup_name
 
+  log_debug "create dirs for new crontab entries..."
+  mkdir /etc/cron.rebootly
+  mkdir /etc/cron.minutely
+
+  log_debug "append entries to '/etc/crontab'..."
   echo "@reboot         root    cd / && run-parts --report /etc/cron.rebootly" >> /etc/crontab
   echo "* * * * *       root    cd / && run-parts --report /etc/cron.minutely" >> /etc/crontab
 
-  mkdir /etc/cron.rebootly
-  mkdir /etc/cron.minutely
+  append_to_protocol "set up 'extend crontab' feature: OK"
+  log_info "set up feature 'extend crontab'. done."
 }
 
 clear
@@ -106,6 +126,11 @@ do
      continue;;
 esac
 done
+
+echo ""
+echo "Protocol:"
+printf "$PROTOCOL"
+echo ""
 
 log "all done!"
 
