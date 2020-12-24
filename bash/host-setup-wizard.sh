@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# version 0.1
+
 set -euo pipefail
 
 source base-utils.sh
