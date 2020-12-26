@@ -11,10 +11,15 @@ function ui {
   user_input "$1"
 }
 
-clear
+read_config_value vrt.guest.iso ~/slag-configurations/global.properties
+ISO_DIR=$CONFIG_VALUE
+
+echo
+echo
+echo
 echo "### Install VM Wizard ###"
 
-cd /mnt/vrt/iso
+cd $ISO_DIR
 iso_list=$(ls -fA *.iso)
 idx=0
 for entry in $iso_list ; do
@@ -55,8 +60,7 @@ RAM=1024
 VM_NAME=INSTALL_$IMG_NAME
 MAC=00:00:00:00:00:07
 
-COMMAND="virt-install --connect qemu:///system -n $VM_NAME -r $RAM --vcpus=1 -f /mnt/vrt/images/$IMG_NAME.img -s $IMG_SIZE --vnc --cdrom $ISO --noautoconsole --os-type linux --accelerate --network=bridge:br0,model=virtio -m $MAC -k de"
-echo $COMMAND
-
-#TODO: complete script
-exit 1
+read_config_value vrt.guest.images ~/slag-configurations/global.properties
+IMAGES_DIR=$CONFIG_VALUE
+echo "virt install..."
+virt-install --connect qemu:///system -n $VM_NAME -r $RAM --vcpus=1 -f $IMAGES_DIR/$IMG_NAME.img -s $IMG_SIZE --vnc --cdrom $ISO --noautoconsole --os-type linux --accelerate --network=bridge:virbr0,model=virtio -m $MAC -k de
