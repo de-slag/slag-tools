@@ -58,9 +58,12 @@ ISO=/mnt/vrt/iso/$SELECTED_ISO
 RAM=1024
 
 VM_NAME=INSTALL_$IMG_NAME
-MAC=00:00:00:00:00:07
+
+read_config_value vrt.install.mac ~/slag-configurations/global.properties
+MAC=$CONFIG_VALUE
 
 read_config_value vrt.guest.images ~/slag-configurations/global.properties
 IMAGES_DIR=$CONFIG_VALUE
 echo "virt install..."
 virt-install --connect qemu:///system -n $VM_NAME -r $RAM --vcpus=1 -f $IMAGES_DIR/$IMG_NAME.img -s $IMG_SIZE --vnc --cdrom $ISO --noautoconsole --os-type linux --accelerate --network=bridge:virbr0,model=virtio -m $MAC -k de
+virsh undefine $VM_NAME
