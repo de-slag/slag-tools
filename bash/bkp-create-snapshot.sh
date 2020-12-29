@@ -1,24 +1,27 @@
 #!/bin/bash
+set -euo pipefail
+
 for i in "$@"
 do
 case $i in
     -p=*|--parent-dir-to-snapshot=*)
-    SNAPSHOT_PARENT_DIR="${i#*=}"
-    shift # past argument=value
-    ;;
+      SNAPSHOT_PARENT_DIR="${i#*=}"
+      shift # past argument=value
+      ;;
     -w=*|--workdir=*)
-    WORKDIR="${i#*=}"
-    shift # past argument=value
-    ;;
+      WORKDIR="${i#*=}"
+      shift # past argument=value
+      ;;
     -s=*|--dir-to-snapshot=*)
-    SNAPSHOT_DIR="${i#*=}"
-    shift # past argument=value
-    ;;
+      SNAPSHOT_DIR="${i#*=}"
+      shift # past argument=value
+      ;;
     -h|--help)
-    echo "usage bkp-create-snapshot.sh -p=/parent/of/source -s=source_dir -w=/path/to/snapshots"
+      echo "usage bkp-create-snapshot.sh -p=/parent/of/source -s=source_dir -w=/path/to/snapshots"
+      ;;
     *)
-          # unknown option
-    ;;
+      # unknown option
+      ;;
 esac
 done
 
