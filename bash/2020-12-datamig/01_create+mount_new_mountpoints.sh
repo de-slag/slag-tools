@@ -15,6 +15,7 @@ mkdir /mnt/vrt
 mkdir /mnt/backup_archive
 mkdir /mnt/tmp
 mkdir /mnt/data
+mkdir /mnt/test
 
 echo "" 
 echo "" 
@@ -27,6 +28,8 @@ echo "jupiter.speedport.ip:/media/raid_a/backup          /mnt/backup          nf
 echo "jupiter.speedport.ip:/media/raid_a/vrt             /mnt/vrt             nfs defaults,nofail 0 9" >> /etc/fstab
 echo "jupiter.speedport.ip:/media/raid_a/backup_archive  /mnt/backup_archive  nfs ro,nofail 0 9"       >> /etc/fstab
 echo "jupiter.speedport.ip:/media/raid_a/tmp             /mnt/tmp             nfs defaults,nofail 0 9" >> /etc/fstab
+echo "jupiter.speedport.ip:/media/raid_a/test            /mnt/test            nfs defaults,nofail 0 9" >> /etc/fstab
+
 
 echo "all added. next: mount all"
 echo "hit ENTER"
