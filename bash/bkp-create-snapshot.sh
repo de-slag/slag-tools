@@ -4,20 +4,20 @@ set -euo pipefail
 for i in "$@"
 do
 case $i in
-    -p=*|--parent-dir-to-snapshot=*)
+    -p=*|--source-dir-parent=*)
       SNAPSHOT_PARENT_DIR="${i#*=}"
       shift # past argument=value
       ;;
-    -w=*|--workdir=*)
-      WORKDIR="${i#*=}"
+    -t=*|--target-dir=*)
+      TARGET_DIR="${i#*=}"
       shift # past argument=value
       ;;
-    -s=*|--dir-to-snapshot=*)
+    -s=*|--source-dir=*)
       SNAPSHOT_DIR="${i#*=}"
       shift # past argument=value
       ;;
     -h|--help)
-      echo "usage bkp-create-snapshot.sh -p=/parent/of/source -s=source_dir -w=/path/to/snapshots"
+      echo "usage bkp-create-snapshot.sh -p=/sourcedir/parent -s=source_dir -t=/target/dir"
       ;;
     *)
       # unknown option
@@ -30,8 +30,8 @@ if [ -z $SNAPSHOT_PARENT_DIR ] ; then
   exit 1
 fi
 
-if [ -z $WORKDIR ] ; then
-  echo "workdir not setted. exit"
+if [ -z $TARGET_DIR ] ; then
+  echo "TARGET_DIR not setted. exit"
   exit 1
 fi
 
@@ -47,12 +47,12 @@ if [ ! -e $SOURCE_DIR ] ; then
   exit 1
 fi
 
-if [ ! -e $WORKDIR ] ; then
-  echo "workdir does not exists. exit"
+if [ ! -e $TARGET_DIR ] ; then
+  echo "TARGET_DIR does not exists. exit"
   exit 1
 fi
 
-TARGET_DIR=$WORKDIR/$SNAPSHOT_DIR
+TARGET_DIR=$TARGET_DIR/$SNAPSHOT_DIR
 
 rsync -av $SOURCE_DIR/ $TARGET_DIR --delete
 

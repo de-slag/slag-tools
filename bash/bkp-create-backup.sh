@@ -4,20 +4,21 @@ set -euo pipefail
 for i in "$@"
 do
 case $i in
-    -p=*|--parent-dir-to-backup=*)
+    -p=*|--source-parent-dir=*)
       BACKUP_PARENT_DIR="${i#*=}"
       shift # past argument=value
       ;;
-    -t=*|--targetdir=*)
+    -t=*|--target-dir=*)
       TARGET_DIR="${i#*=}"
       shift # past argument=value
       ;;
-    -n=*|--name=*)
+    -s=*|--source-dir=*)
       DIR_NAME="${i#*=}"
       shift # past argument=value
       ;;
     -h|--help)
-      echo "usage bkp-create-backup.sh -p=/parent/of/source -s=source_dir -w=/path/to/backups"
+      echo "usage bkp-create-backup.sh -p=/parent/of/source -s=source_dir -t=/path/to/backups"
+      exit
       ;;
     *)
       # unknown option
