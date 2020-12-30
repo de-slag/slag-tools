@@ -24,6 +24,6 @@ SOURCE=$4
 
 ./bkp-create-snapshot.sh -p=$SOURCE_PARENT -t=$SNAPSHOT_PARENT -s=$SOURCE
 if [ 1 -eq $CLEANUP_MODE ] ; then
-  ./bkp-cleanup-not-to-backup.sh -d=$SNAPSHOT_PARENT/$SOURCE
+  ./bkp-cleanup-traverse-not-to-backup.sh -d=$SNAPSHOT_PARENT/$SOURCE
 fi
 ./bkp-create-backup.sh -p=$SNAPSHOT_PARENT -s=$SOURCE -t=$BACKUP_PARENT
