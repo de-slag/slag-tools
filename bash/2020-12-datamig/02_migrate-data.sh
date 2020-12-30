@@ -24,6 +24,7 @@ for area in $data_areas ; do
  fi
 
  echo "migrate '$from_area' to '$to_area'"
- cp -R $from_area/* $to_area
+ #cp -R $from_area/* $to_area
+ rsync -av $from_area/ $to_area
 
 done 
