@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#while [ true ] ; do ./03_monitor_data_migration.sh ; done
+#while [ true ] ; do clear ; ./03_monitor_data_migration.sh ; sleep 1200 ; done
 
 DIRS=
 DIRS="$DIRS /media/test"
