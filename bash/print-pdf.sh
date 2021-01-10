@@ -1,12 +1,12 @@
 #!/bin/bash
+set -euo pipefail
+
 PRINTER_NAME=Kyocera_FS-1030D
-DIR_TO_PRINT=/var/spool/lpd
-PRINT_ARCHIVE=/tmp/var-spool-lpd-archive
+TO_PRINT_DIR=/var/spool/lpd
+TS=$(date '+%Y-%m-%d_%H-%M-%S')
+LOG_FILE=print.log
 
-cd $DIR_TO_PRINT
-lp -d $PRINTER_NAME *.pdf
-if [ ! -e $PRINT_ARCHIVE ] ; then
-  mkdir $PRINT_ARCHIVE
-fi
-mv *.pdf $PRINT_ARCHIVE
+cd $TO_PRINT_DIR
 
+lp -d $PRINTER_NAME *.pdf >> $LOG_FILE 
+tar -cvzf $TS.tar.gz *.pdf >> $LOG_FILE
