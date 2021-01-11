@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source ~/slag-tools/bash/utl-core-utils.sh
+
+set -eo pipefail
+
+if [ "$1" == "DEBUG" ] ; then
+  LOG_LEVEL=DEBUG
+  log_debug "DEBUG MODE"
+  shift
+fi
+
+if [ "$1" == "TRACE" ] ; then
+  LOG_LEVEL=TRACE
+  log_trace "TRACE MODE"
+  set -x
+  shift
+fi
+
+set -u
+
+CONFIG_FILE=~/slag-configurations/global.properties
