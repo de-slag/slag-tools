@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source logging-utils-1.sh 
+source ~/slag-tools/bash/utl-logging-utils.sh 
 
 function assert_not_null {
   local value_description=$1
@@ -31,7 +31,3 @@ function user_input {
   printf "$text "
   read USER_INPUT
 }
-
-echo "base-utils, methods:"
-echo "  assert_not_null (value)"
-echo "  assert_user_root ()"
