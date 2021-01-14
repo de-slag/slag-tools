@@ -3,6 +3,7 @@
 source ~/slag-tools/bash/core-script.sh
 
 readonly BASE_DIR=~/slag-tools/bash
+readonly CRON_BASE_DIR=/etc
 
 clear
 
@@ -144,7 +145,7 @@ function determine_target_script_name {
     *) log_error "not supported cront type: '$CRON_TYPE'" ; exit ;;
   esac
   
-  local interim_target_script_name=/etc/cron.$cron_dir_part/$PURE_SCRIPT_NAME
+  local interim_target_script_name=$CRON_BASE_DIR/cron.$cron_dir_part/$PURE_SCRIPT_NAME
   if [ ! -e $interim_target_script_name ] ; then
     TARGET_SCRIPT_NAME=$interim_target_script_name
     return
@@ -165,6 +166,14 @@ function create_copy_cmd {
 }
 
 function final_user_check {
+
+  echo "final script:"
+  echo "-----"
+  cat $TMP_SCRIPT_NAME
+  echo "-----"
+  echo "copy cmd: '$COPY_CMD'"
+  echo "-----"
+
   ui "is this ok? (yn)"
   local is_ok=$USER_INPUT
   if [ "y" != "$is_ok" ] ; then
@@ -174,7 +183,10 @@ function final_user_check {
   log_debug "user selected final check ok"
 }
 
-
+function install_crontab_script {
+  $($COPY_CMD)
+  chmod +x $TARGET_SCRIPT_NAME
+}
 
 
 find_relevant_files
@@ -187,10 +199,9 @@ create_tmp_script
 determine_target_script_name
 create_copy_cmd
 
-echo "final script:"
-echo "-----"
-cat $TMP_SCRIPT_NAME
-echo "-----"
 
-echo "copy cmd: '$COPY_CMD'"
 final_user_check
+install_crontab_script
+
+
+
