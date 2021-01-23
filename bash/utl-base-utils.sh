@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ~/slag-tools/bash/utl-logging-utils.sh 
+source ~/slag-tools/bash/utl-logging-utils.sh
 
 function assert_not_null {
   local value_description=$1
@@ -30,4 +30,21 @@ function user_input {
   USER_INPUT=
   printf "$text "
   read USER_INPUT
+}
+
+CONTAINS_FILES_WITH_EXTENSION=
+function contains_files_with_extension {
+  dir_to_check=$1 file_extension=$2 CONTAINS_FILES_WITH_EXTENSION=
+
+  # deactivate pipefail because a fail is part of this statement
+  set +o pipefail
+
+  count=`ls -1 $dir_to_check/*.$file_extension 2>/dev/null | wc -l`
+  set -o pipefail
+
+  if [ $count != 0 ] ; then
+    CONTAINS_FILES_WITH_EXTENSION=true
+  else
+    CONTAINS_FILES_WITH_EXTENSION=false
+  fi
 }
