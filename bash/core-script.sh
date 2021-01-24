@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source ~/slag-tools/bash/utl-core-utils.sh
+source ~/slag-tools/bash/utl-contains_files_with_extension.sh
 
 set -eo pipefail
 
