@@ -1,11 +1,23 @@
 #!/bin/bash
 
 source ~/slag-tools/bash/core-script.sh
+source ~/slag-tools/bash/utl-string-utils.sh
 
-TS=$(date +%s)
+TS=$(date $TIMESTAMP_PATTERN)
 
 UI_FROM=
 UI_TO=
+
+function print_help {
+  echo "synthax: move-jpgs.sh [options]"
+  echo ""
+  echo "options:"
+  echo "-h  --help                print this help"
+  echo "-s  --source-dir          directory where jpgs are resided, mandatory"
+  echo "-t  --target-dir-parent   parent dir where jpgs should be moved to, mandatory"
+  echo ""
+  echo "example: move-jpgs.sh -s=/path/to/jpgs -t=/path/moved/to"
+}
 
 for i in "$@" ; do
   case $i in
@@ -17,47 +29,51 @@ for i in "$@" ; do
       UI_TO="${i#*=}"
       shift
       ;;
+    -h|--help)
+      print_help
+      exit 0
+      ;;
     *)
-      echo "unknown option: $i"
+      log_warn "unknown option: $i"
     ;;
   esac
 done
 
 if [ -z $UI_FROM ] ; then
-  log_error "'from' not setted. exit'"
+  log_error "'source-dir' not setted. Start with '-h' for help. Exit'"
   exit 1
 fi
 
 if [ -z $UI_TO ] ; then
-  log_error "'to' not setted. exit'"
+  log_error "'target-dir-parent' not setted. Start with '-h for help. 'Exit'"
   exit 1
 fi
 
 if [ ! -d $UI_FROM ] ; then
-  echo "from-dir not found: '$UI_FROM'"
+  log_error "'source-dir' not found: '$UI_FROM'"
   exit 1
 fi
 
 if [ ! -d $UI_TO ] ; then
-  echo "to-dir not found: '$UI_TO'"
+  log_error "'target-dir-parent' not found: '$UI_TO'"
   exit 1
 fi
 
 FROM=$UI_FROM
 TO=$UI_TO/$TS
 
-echo "check if something to do..."
+log_debug "check if something to do..."
 contains_files_with_extension $FROM jpg
 if [ $CONTAINS_FILES_WITH_EXTENSION != true ] ; then
-  echo "nothing to do"
+  log_info "nothing to do"
   exit 0
 fi
 
-echo "ok, there IS something to do"
+log_debug "ok, there IS something to do"
 
 mkdir $TO
 
 cp -v $FROM/*.jpg $TO
 rm -v $FROM/*.jpg
 
-echo "all done"
+log_info "all done"
