@@ -2,6 +2,7 @@
 
 source ~/slag-tools/bash/utl-core-utils.sh
 source ~/slag-tools/bash/utl-contains_files_with_extension.sh
+source ~/slag-tools/bash/utl-constants.sh
 
 set -eo pipefail
 
