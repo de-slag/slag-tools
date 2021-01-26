@@ -3,7 +3,7 @@
 source ~/slag-tools/bash/core-script.sh
 
 readonly BASE_DIR=~/slag-tools/bash
-readonly CRON_BASE_DIR=/etc
+readonly CRON_BASE_DIR=/tmp
 
 clear
 
@@ -125,11 +125,9 @@ function select_parameters {
   PARAMETERS=$USER_INPUT
 }
 
-TMP_SCRIPT_NAME=
-function create_tmp_script {
-   TMP_SCRIPT_NAME=/tmp/$TS-$PURE_SCRIPT_NAME
-   echo "#!/bin/bash"                                    > $TMP_SCRIPT_NAME
-   echo "$BASE_DIR/$SCRIPT $PARAMETERS &>> $LOG_TARGET" >> $TMP_SCRIPT_NAME
+SCRIPT_CMD=
+function create_script_cmd {
+   SCRIPT_CMD="$BASE_DIR/$SCRIPT $PARAMETERS &>> $LOG_TARGET"
 }
 
 TARGET_SCRIPT_NAME=
@@ -160,33 +158,34 @@ function determine_target_script_name {
 
 }
 
-COPY_CMD=
-function create_copy_cmd {
-  COPY_CMD="cp $TMP_SCRIPT_NAME $TARGET_SCRIPT_NAME"
-}
-
-function final_user_check {
-
-  echo "final script:"
-  echo "-----"
-  cat $TMP_SCRIPT_NAME
-  echo "-----"
-  echo "copy cmd: '$COPY_CMD'"
-  echo "-----"
-
-  ui "is this ok? (yn)"
-  local is_ok=$USER_INPUT
-  if [ "y" != "$is_ok" ] ; then
-    echo "you selected 'not ok'. exit."
-    exit 0
+function assert_target_script_name {
+  echo "check target script name..."
+  if [ -e $TARGET_SCRIPT_NAME ] ; then
+    echo "ERROR: target script name already in use: '$TARGET_SCRIPT_NAME'. exit."
+    exit 1
   fi
-  log_debug "user selected final check ok"
+  echo "OK"
 }
 
-function install_crontab_script {
-  $($COPY_CMD)
-  chmod +x $TARGET_SCRIPT_NAME
+function assert_log_target {
+   echo "check log target name..."
+  if [ -e $LOG_TARGET ] ; then
+    echo "ERROR: log target name already in use: '$LOG_TARGET'. exit."
+    exit 1
+  fi
+  echo "OK"
 }
+
+function print_wizard_output {
+  echo "#####"
+  echo "run the following lines as root:"
+  echo
+  echo "echo '#!/bin/bash' >> $TARGET_SCRIPT_NAME"
+  echo "echo '$SCRIPT_CMD' >> $TARGET_SCRIPT_NAME"
+  echo "#####"
+}
+
+
 
 
 find_relevant_files
@@ -195,13 +194,15 @@ select_parameters
 extract_pure_script_name
 choose_cron_type
 choose_log_target
-create_tmp_script
+create_script_cmd
 determine_target_script_name
-create_copy_cmd
+assert_target_script_name
+assert_log_target
+
+print_wizard_output
 
 
-final_user_check
-install_crontab_script
+echo "all done"
 
 
 
