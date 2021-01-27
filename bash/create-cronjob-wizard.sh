@@ -3,7 +3,7 @@
 source ~/slag-tools/bash/core-script.sh
 
 readonly BASE_DIR=~/slag-tools/bash
-readonly CRON_BASE_DIR=/tmp
+readonly CRON_BASE_DIR=/etc
 
 clear
 
