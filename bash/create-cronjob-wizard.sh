@@ -180,8 +180,9 @@ function print_wizard_output {
   echo "#####"
   echo "run the following lines as root:"
   echo
-  echo "echo '#!/bin/bash' >> $TARGET_SCRIPT_NAME"
+  echo "echo '#!/bin/bash' > $TARGET_SCRIPT_NAME"
   echo "echo '$SCRIPT_CMD' >> $TARGET_SCRIPT_NAME"
+  echo "chmod +x $TARGET_SCRIPT_NAME"
   echo "#####"
 }
 
