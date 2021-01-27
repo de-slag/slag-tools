@@ -1,7 +1,6 @@
 #!/bin/bash
 
 source ~/slag-tools/bash/core-script.sh
-source ~/slag-tools/bash/utl-string-utils.sh
 
 TS=$(date $TIMESTAMP_PATTERN)
 
