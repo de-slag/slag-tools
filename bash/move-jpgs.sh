@@ -75,6 +75,6 @@ mkdir $TO
 cp -v $FROM/*.jpg $TO
 rm -v $FROM/*.jpg
 
-chmod -R +x $TO
+chmod -R +r $TO
 
 log_info "all done"
