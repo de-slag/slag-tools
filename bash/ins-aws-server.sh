@@ -2,21 +2,60 @@
 
 source ~/slag-tools/bash/core-script.sh
 
-readonly PEM_FILE=~/.ssh/aws-003.pem
+readonly TS=$(date $TIMESTAMP_PATTERN)
 
-TS=$(date $TIMESTAMP_PATTERN)
 
-HOST=$1
-UPLOAD_FILE=to-be-uploaded.tar.gz
-USER=ubuntu
+function print_help {
+  echo "TODO"
+}
 
+
+HOST=
+PEM_FILE=
+USER=
+UPLOAD_FILE=
+for i in "$@" ; do
+  case $i in
+    --help)
+      print_help
+      exit 0
+      ;;
+
+    -h=*|--host=*)
+      HOST="${i#*=}"
+      shift
+      ;;
+
+    -p=*|--pem-file=*)
+      PEM_FILE="${i#*=}"
+      shift
+      ;;
+
+    -u=*|--user=*)
+      USER="${i#*=}"
+      shift
+      ;;
+  
+    -f=*|--upload-file=*)
+      UPLOAD_FILE="${i#*=}"
+      shift
+      ;;
+     
+    *)
+      log_warn "unknown option: $i"
+    ;;
+  esac
+done
+
+# assert parameters
+if [ -z $HOST ] ; then log_error "HOST not setted: '$HOST'" ; exit 1 ; fi
 if [ -z $PEM_FILE ] ; then log_error "PEM_FILE not setted: '$PEM_FILE'" ; exit 1 ; fi
+if [ -z $USER ] ; then log_error "USER not setted: '$USER'" ; exit 1 ; fi
 if [ -z $UPLOAD_FILE ] ; then log_error "UPLOAD_FILE not setted: '$UPLOAD_FILE'" ; exit 1 ; fi
 
+# assert files
 if [ ! -f $PEM_FILE ] ; then log_error "PEM_FILE not found: '$PEM_FILE'" ; exit 1 ; fi
 if [ ! -f $UPLOAD_FILE ] ; then log_error "UPLOAD_FILE not found: '$UPLOAD_FILE'" ; exit 1 ; fi
-
-
 
 
 log_info "start update..."
@@ -38,8 +77,6 @@ if [[ "$UPLOAD_FILE" == *.tar.gz ]] ; then
 else
   log_info "uploaded file seems not to be a gzipped archive. Unzip by your own if any"
 fi
-
-
 
 log_info "create crontab-file..."
 CRON_FILE=/etc/cron.d/slag-start-server
@@ -68,6 +105,8 @@ ssh -i $PEM_FILE $USER@$HOST "chmod +x $AUTOSTART_FILE"
 
 log_info "setting ownership of home dir of '$USER'..."
 ssh -i $PEM_FILE $USER@$HOST "chown -R $USER:$USER * > init-set-ownership-$TS.log"
+
+ui "all done. hit ENTER to continue."
 
 ssh -i $PEM_FILE $USER@$HOST
 
