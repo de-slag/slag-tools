@@ -1,28 +1,22 @@
 # slag-tools
+(This document contains target concepts. It does not describe the state as it is.)
 
-## program files
+## Table of Content
+* [Name Convention](#name-convention)
 
-*purpose:*
-* primary logic elements
-* elementary executable logic
+##
 
-*naming-pattern:*
-* noun-verb-version.sh
-* noun-verb-[adverb]-version.sh
+## Name Convention
+### Prefixes
+|Prefix|Description|
+|---|---|
+|bkp-|scripts to make backups|
+|ins-|installer that should run only once|
+|nfo-|helper scripts that show information about system and its state|
+|mtn-|maintenance and monitoring scripts|
+|utl-|utils scripts with no extra logic|
+### Postfixes
+|Postfix|Description|
+|---|---|
+|-wizard|an interactive script that does not change a system itself. It only generates scripts and files to do that.|
 
-## util files
-*purpose:*
-* not elementary executalbe logic, no main program
-* tools to be used in external logic as **source**
-* elementary called prints public methods
-
-*naming:*
-* -utils*
-
-## public methods
-*naming:*
-* verb-[adverb]-noun
-
-## private methods (sub logic elements)
-*naming:*
-* verb-[adverb]-noun-[0,1,2,..]
