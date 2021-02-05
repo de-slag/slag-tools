@@ -1,7 +1,0 @@
-logging-utils, methods:
-  log (text)
-  log_error (text)
-  log_warn (text)
-  log_info (text)
-  log_debug (text)
-2020-12-07 15:51:44 [INFO] - this is a info
