@@ -56,8 +56,8 @@ setup() {
   [[ "$output" = $expected_file_count ]]
 
   # assert file size of backup tar
-  local min_tar_file_size=4060
-  local max_tar_file_size=4070
+  local min_tar_file_size=4050
+  local max_tar_file_size=4080
 
   run cat file-size-backup-tar.txt
 
