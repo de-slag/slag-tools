@@ -34,7 +34,12 @@ function user_input {
 
 CONTAINS_FILES_WITH_EXTENSION=
 function contains_files_with_extension {
-  dir_to_check=$1 file_extension=$2 CONTAINS_FILES_WITH_EXTENSION=
+  dir_to_check=$1
+  file_extension=$2
+  CONTAINS_FILES_WITH_EXTENSION=
+
+  if [ ! -d $dir_to_check ] ; then log_error "not a valid directory: '$dir_to_check'" ; exit 1 ; fi
+  if [ -z $file_extension ] ; then log_error "file extension not setted" ; exit 1 ; fi
 
   # deactivate pipefail because a fail is part of this statement
   set +o pipefail
