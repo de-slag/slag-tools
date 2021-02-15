@@ -39,6 +39,27 @@ setup() {
 
   # Up to here the tests are running correct. You can check this manually.
   # But on this point it should be some asserts to verify automaticly that all processes are ok.
+
+
+  # collect data for assertions
+  cd $BASE_DIR
+
+  find ./snapshot -type f | wc -l > file-count-snapshot.txt
+  stat --printf="%s" backup/joe*.tar.gz > file-size-backup-tar.txt
+
+  # assert collected data
+
+  # assert file count snapshot dir
+  run cat file-count-snapshot.txt
+  [[ "$output" = "5" ]]
+
+  # assert file size of backup tar
+
+  run cat file-size-backup-tar.txt
+  [[ "$output" -gt 4060 ]]
+  [[ "$output" -lt 4070 ]]
+
+  cd ~ 
 }
 
 teardown() {
