@@ -49,15 +49,20 @@ setup() {
 
   # assert collected data
 
-  # assert file count snapshot dir
+  # assert file count for snapshot dir
+  local expected_file_count=5
+
   run cat file-count-snapshot.txt
-  [[ "$output" = "5" ]]
+  [[ "$output" = $expected_file_count ]]
 
   # assert file size of backup tar
+  local min_tar_file_size=4060
+  local max_tar_file_size=4070
 
   run cat file-size-backup-tar.txt
-  [[ "$output" -gt 4060 ]]
-  [[ "$output" -lt 4070 ]]
+
+  [[ "$output" -ge $min_tar_file_size ]]
+  [[ "$output" -le $max_tar_file_size ]]
 
   cd ~ 
 }
