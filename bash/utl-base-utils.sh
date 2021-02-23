@@ -2,6 +2,9 @@
 
 source ~/slag-tools/bash/utl-logging-utils.sh
 
+## @description: Asserts that the value is not null, gives a readable error log and exit 1 if. Value_description must not be null. Less in relevance when using 'set -u'
+## @parameter: value_description, value
+## @return: void
 function assert_not_null {
   local value_description=$1
   local value=$2
@@ -17,6 +20,10 @@ function assert_not_null {
   fi
 }
 
+
+## @description: Asserts that the user is root. Exit 1, if not.
+## @parameter: none
+## @return: void
 function assert_user_root {
   if [ "$EUID" -ne 0 ] ; then
     log_error "user is not root"
@@ -24,6 +31,9 @@ function assert_user_root {
   fi
 }
 
+## @description: Prints a text and returns the following user input
+## @parameter: text
+## @return: USER_INPUT
 USER_INPUT=
 function user_input {
   local text="$1"
@@ -32,10 +42,15 @@ function user_input {
   read USER_INPUT
 }
 
+## @description: A short wrapper for 'user_input'
 function ui {
   user_input "$1"
 }
 
+
+## @description: Builds a user friendly numbered output using a given list (blank separated) and returns the value of the list, that the user-input number is representing.
+## @parameter: select_list
+## @return: SELECTED_ITEM
 SELECTED_ITEM=
 function user_select_item {
   local select_list="$1"
@@ -75,6 +90,8 @@ function user_select_item {
   log_warn "invalid selection: '$selected_entry', out ouf '$select_list'"
 }
 
+## @parameter: dir_name
+## @return: void
 function mkdir_if_any {
   local dir_name=$1
 
