@@ -12,9 +12,6 @@ fi
 read_config_value install.packages.debian
 PACKAGES_TO_BE_INSTALLED=$CONFIG_VALUE
 
-for package in $PACKAGES_TO_BE_INSTALLED ; do
-  echo "install $package"
-  apt-get install package
-done
+apt install $PACKAGES_TO_BE_INSTALLED
 
 log_info "all done"
