@@ -71,10 +71,6 @@ echo "Your application can be accessed in http://localhost:8081/sample"
 
 user_confirm "creation is done. feel free to test the application."
 
-user_confirm "teardown on your own please"
-
-exit 0
-
 user_confirm "teardown.."
 
 user_confirm "teardown: remove local created files.."
@@ -83,12 +79,21 @@ rm $DOCKER_FILE
 rm sample.war
 
 user_confirm "teardown: stopping containers.."
-
 sudo docker container stop $TC_CONTAINER_NAME
 sudo docker container stop $OWN_CONTAINER_NAME
+list_images_and_containers
 
+user_confirm "teardown: removing containers.."
 sudo docker container rm $TC_CONTAINER_NAME
 sudo docker container rm $OWN_CONTAINER_NAME
+list_images_and_containers
+
+user_confirm "teardown: removing images.."
+
+sudo docker image rm $OWN_IMAGE_NAME
+sudo docker image rm tomcat:8.0
+list_images_and_containers
+
 
 
 
